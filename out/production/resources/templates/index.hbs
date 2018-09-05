@@ -1,16 +1,22 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Person</title>
-</head>
-<body>
-    <ul>
-        <li> name: {{name}}</li>
-        <li> age: {{age}}</li>
-    </ul>
-</body>
-</html>
+{{#partial "title"}}
+    {{#if name}}
+        {{name}}
+    {{else}}
+        Unknown
+    {{/if}}
+{{/partial}}
+
+
+{{#partial "content"}}
+
+<a href="/person">back</a>
+<ul>
+    <li> Name: {{name}}</li>
+    <li> Age: {{age}}</li>
+    <li> NIN: {{nin}}</li>
+</ul>
+{{/partial}}
+
+
+
+{{> base.hbs}}

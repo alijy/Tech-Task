@@ -20,4 +20,14 @@ public class simplePersonDAO implements PersonDAO {
     public List<Person> findAll() {
         return new ArrayList<>(people);
     }
+
+    @Override
+    public Person get(int id) {
+        for (Person person : people) {
+            if (person.getId() == id) {
+                return person;
+            }
+        }
+        return null;
+    }
 }

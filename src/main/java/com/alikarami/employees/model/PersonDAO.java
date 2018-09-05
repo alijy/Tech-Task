@@ -7,4 +7,6 @@ public interface PersonDAO {
     boolean add(Person person);
 
     List<Person> findAll();
+
+    Person get(int id);
 }

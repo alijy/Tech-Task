@@ -35,6 +35,7 @@ public class Main {
 //            Map<String, String> model = new HashMap<>();
 //            model.put("name","ali");
 //            model.put("age","36");
+//            model.put("nin","ab123456c");
 //            return new HandlebarsTemplateEngine().render(
 //                    new ModelAndView(model, "index.hbs")
 //            );
@@ -64,6 +65,18 @@ public class Main {
             return null;
         });
 
+        get("/person/:id", (request, response) -> {
+            Person person = dao.get(Integer.parseInt(request.params("id")));
+            if (person != null) {
+                return new HandlebarsTemplateEngine().render(
+                        new ModelAndView(person, "index.hbs")
+                );
+            }
+            else {
+                response.redirect("/person");
+                return null;
+            }
+        });
 
 
         Spark.redirect.get("/*", "/person");
