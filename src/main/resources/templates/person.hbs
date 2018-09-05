@@ -5,6 +5,22 @@
 
 {{#partial "content"}}
 
+    <h1>Current People</h1>
+
+    <ul>
+        {{#each person}}
+            <li>{{name}}</li>
+        {{/each}}
+    </ul>
+
+    <form action="/person" method="post">
+        <input type="text" placeholder="Full Name" name="name">
+        <input type="text" placeholder="Age" name="age">
+        <input type="text" placeholder="NIN" name="nin">
+        <button>Add Person</button>
+    </form>
+
+
 {{/partial}}
 
 

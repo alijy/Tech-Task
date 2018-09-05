@@ -1,5 +1,6 @@
 package com.alikarami.employees;
 
+import com.alikarami.employees.model.Person;
 import com.alikarami.employees.model.PersonDAO;
 import com.alikarami.employees.model.simplePersonDAO;
 import spark.ModelAndView;
@@ -9,39 +10,36 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import java.util.HashMap;
 import java.util.Map;
 
-import static spark.Spark.get;
-import static spark.Spark.modelAndView;
-import static spark.Spark.staticFileLocation;
+import static spark.Spark.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        get("/", (request, response) -> "Coming Soon!");
+
+//        /* first approach : returns a string response */
+//        get("/person", (request, response) -> "name: ali");
 
 
-        /* first approach : returns a string response */
-        /*
-        get("/person", (request, response) -> "name: ali");
-        */
 
-        /* second approach : returns a json response */
-        /*
-        get("/person", (request, response) -> {
-            response.type("application/json");
-            return "{\"name\":\"ali\" , \"age\":\"36\"}";
-        });
-        */
+//        /* second approach : returns a json response */
+//        get("/person", (request, response) -> {
+//            response.type("application/json");
+//            return "{\"name\":\"ali\" , \"age\":\"36\"}";
+//        });
 
-        /* third approach : uses a basic model and a view page */
-        get("/person", (request, response) -> {
-            Map<String, String> model = new HashMap<>();
-            model.put("name","ali");
-            model.put("age","36");
-            return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, "index.hbs")
-            );
-        });
+
+
+//        /* third approach : uses a basic model and a view page */
+//        get("/person", (request, response) -> {
+//            Map<String, String> model = new HashMap<>();
+//            model.put("name","ali");
+//            model.put("age","36");
+//            return new HandlebarsTemplateEngine().render(
+//                    new ModelAndView(model, "index.hbs")
+//            );
+//        });
+
 
 
         /* fourth approach: uses a model prototype */
@@ -50,6 +48,19 @@ public class Main {
 
         get("/person", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
+            model.put("person", dao.findAll());
+            return new HandlebarsTemplateEngine().render(
+                    new ModelAndView(model, "person.hbs")
+            );
+        });
+
+        post("/person", (request, response) -> {
+            String name = request.queryParams("name");
+            int age = Integer.parseInt(request.queryParams("age"));
+            String nin = request.queryParams("nin");
+            Person person = new Person(name, age, nin);
+            dao.add(person);
+            response.redirect("/person");
             return null;
         });
 
