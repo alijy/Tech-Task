@@ -11,6 +11,7 @@ import java.util.Map;
 
 import static spark.Spark.get;
 import static spark.Spark.modelAndView;
+import static spark.Spark.staticFileLocation;
 
 public class Main {
 
@@ -38,15 +39,17 @@ public class Main {
             model.put("name","ali");
             model.put("age","36");
             return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, "index0.hbs")
+                    new ModelAndView(model, "index.hbs")
             );
         });
 
 
         /* fourth approach: uses a model prototype */
+        staticFileLocation("/public");
         PersonDAO dao = new simplePersonDAO();
 
         get("/person", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
             return null;
         });
 
