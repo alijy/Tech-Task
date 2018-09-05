@@ -14,6 +14,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        get("/", (request, response) -> "Coming Soon!");
+
+
         /* first approach */
 //        get("/person", (request, response) -> "name: ali");
 
@@ -26,11 +29,11 @@ public class Main {
 
         /* third approach */
         get("/person", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
+            Map<String, String> model = new HashMap<>();
             model.put("name","ali");
             model.put("age","36");
             return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, "person.hbs")
+                    new ModelAndView(model, "index.hbs")
             );
         });
 
