@@ -51,7 +51,7 @@ public class Main {
             Map<String, Object> model = new HashMap<>();
             model.put("person", dao.findAll());
             return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, "person.hbs")
+                    new ModelAndView(model, "people.hbs")
             );
         });
 
@@ -69,7 +69,7 @@ public class Main {
             Person person = dao.get(Integer.parseInt(request.params("id")));
             if (person != null) {
                 return new HandlebarsTemplateEngine().render(
-                        new ModelAndView(person, "index.hbs")
+                        new ModelAndView(person, "person.hbs")
                 );
             }
             else {

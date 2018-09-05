@@ -1,26 +1,15 @@
 {{#partial "title"}}
-    Person
+    {{name}}
 {{/partial}}
 
 
 {{#partial "content"}}
-
-    <h1>Current People</h1>
-
+    <a href="/person">back</a>
     <ul>
-        {{#each person}}
-            <li>{{name}} (<a href="/person/{{id}}">Show</a>)</li>
-        {{/each}}
+        <li> Name: {{name}}</li>
+        <li> Age: {{age}}</li>
+        <li> NIN: {{nin}}</li>
     </ul>
-
-    <form action="/person" method="post">
-        <input type="text" placeholder="Full Name" name="name">
-        <input type="text" placeholder="Age" name="age">
-        <input type="text" placeholder="NIN" name="nin">
-        <button>Add Person</button>
-    </form>
-
-
 {{/partial}}
 
 
