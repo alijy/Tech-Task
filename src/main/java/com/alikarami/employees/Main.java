@@ -7,6 +7,7 @@ import spark.ModelAndView;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,16 +67,20 @@ public class Main {
         });
 
         get("/person/:id", (request, response) -> {
-            Person person = dao.get(Integer.parseInt(request.params("id")));
-            if (person != null) {
-                return new HandlebarsTemplateEngine().render(
-                        new ModelAndView(person, "person.hbs")
-                );
+            try {
+                int id = Integer.parseInt(request.params("id"));
+                Person person = dao.get(id);
+                if (person != null) {
+                    return new HandlebarsTemplateEngine().render(
+                            new ModelAndView(person, "person.hbs")
+                    );
+                }
             }
-            else {
+            catch (Exception e) {
                 response.redirect("/person");
-                return null;
             }
+            response.redirect("/person");
+            return null;
         });
 
 
