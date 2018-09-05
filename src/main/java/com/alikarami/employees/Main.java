@@ -1,5 +1,7 @@
 package com.alikarami.employees;
 
+import com.alikarami.employees.model.PersonDAO;
+import com.alikarami.employees.model.simplePersonDAO;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -27,6 +29,7 @@ public class Main {
 //            return "{\"name\":\"ali\" , \"age\":\"36\"}";
 //        });
 
+
         /* third approach */
         get("/person", (request, response) -> {
             Map<String, String> model = new HashMap<>();
@@ -36,6 +39,15 @@ public class Main {
                     new ModelAndView(model, "index.hbs")
             );
         });
+
+
+        /* fourth approach: using model prototype */
+        PersonDAO dao = new simplePersonDAO();
+
+        get("/person", (request, response) -> {
+
+        });
+
 
 
         Spark.redirect.get("/*", "/person");
